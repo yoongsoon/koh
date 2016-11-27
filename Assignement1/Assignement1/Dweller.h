@@ -2,6 +2,8 @@
 #define DWELLER_H
 #include "GameObject.h"
 #include "Vec2D.h"
+#include "Outfit.h"
+#include "Weapon.h"
 
 class Dweller : public GameObject
 {

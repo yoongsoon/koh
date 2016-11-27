@@ -1,5 +1,6 @@
 #include "Dweller.h"
-
+#include  <vector>
+#include <algorithm>
 
 
 Dweller::Dweller(const string & name, const int & unique)
@@ -12,6 +13,29 @@ Dweller::Dweller(const string & name, const int & unique)
 	radaway_ = 0;
 	outfit_ = NULL;
 	weapon_ = NULL;
+
+	//int temporary = unique;
+	//std::vector<int>  storageValue;
+
+	//while (temporary > 0)
+	//{
+	//	int digit = temporary % 10;  // eg. 12345 % 10 = 5 (extract from  last digit to first digit ) 
+	//	                            //   1234 % 10 = 4
+	//                                //  123  % 10 =3
+
+	//	temporary /= 10;             // 12345 /10 =  1234
+	//	storageValue.push_back(digit);  // 1234 /10 = 123
+	//	                            
+	//}
+
+	//// reverse order of elements
+	//// e.g  1,2,3,4,5 will be reverse to
+	//// 5,4,3,2, 1 , where 5 is now the  0th element
+	//std::reverse(storageValue.begin(), storageValue.end());
+
+	
+
+	
 }
 
 
@@ -48,6 +72,13 @@ void Dweller::receiveRadDamage(const int & radDamage)
 	
 }
 
+void Dweller::receiveEquipmentDamage(const int & equipDamage)
+{
+
+
+
+}
+
 int Dweller::getCurrentHealth() const
 {
 	return health_;
@@ -57,6 +88,17 @@ int Dweller::getCurrentRadDamage() const
 {
 	return health_;
 }
+
+int Dweller::getAttackDmg() const
+{
+
+}
+
+int Dweller::getSPECIAL() const
+{
+	return SPECIAL_;
+}
+
 
 void Dweller::addStimpak(const int &otherStimpak)
 {
@@ -80,10 +122,9 @@ void Dweller::useRadAway()
 	
 }
 
-void Dweller::setPosition(const Vec2D & position)
+void Dweller::setPosition(const Vec2D & otherPosition)
 {
-  
-
+	position_ = otherPosition;
 }
 
 Vec2D Dweller::getPosition() const
@@ -102,6 +143,18 @@ bool Dweller::isDead()
 		return false;
 	}
 	
+}
+
+Outfit* Dweller::assignOutfit(Outfit * wearOutfit)
+{
+
+
+}
+
+Weapon* Dweller::assignWeapon(Weapon * wearWeapon)
+{
+
+
 }
 
 
