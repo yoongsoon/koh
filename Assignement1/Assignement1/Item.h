@@ -10,7 +10,7 @@ public:
 	virtual void receiveDamage(const int &) = 0;
 	int getDurability() const;
 protected:
-	int durability :
+	int durability_;
 };
 
 #endif
