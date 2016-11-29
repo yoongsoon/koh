@@ -5,7 +5,7 @@ using namespace std;
 
 Dweller::Dweller(const string & name, const int & unique)
 {
-	name_ = name;   
+	name_ = name;
 	health_ = 100;
 	radiation_ = 0;
 	stimpak_ = 0;
@@ -20,7 +20,7 @@ Dweller::Dweller(const string & name, const int & unique)
 	{
 		if (dwellerSpecial.size() == 7)
 		{
-			for (int j = 0; j < dwellerSpecial.size(); j++)
+			for (unsigned int j = 0; j < dwellerSpecial.size(); j++)
 			{
 				output[j] = dwellerSpecial[j];
 				if (output[j] >9)
@@ -34,14 +34,14 @@ Dweller::Dweller(const string & name, const int & unique)
 			throw exception("Out of range");
 		}
 
-	}   
+	}
 	else
 	{
-		string outfitSpecial = to_string(outfit_->getSPECIAL);
+		string outfitSpecial = to_string(outfit_->getSPECIAL());
 
-		if (outfitSpecial.size() == 7 &&  dwellerSpecial.size() == 7)
+		if (outfitSpecial.size() == 7 && dwellerSpecial.size() == 7)
 		{
-			for (int i = 0; i < outfitSpecial.size(); i++)
+			for (unsigned int i = 0; i < outfitSpecial.size(); i++)
 			{
 				output[i] = outfitSpecial[i] + dwellerSpecial[i];
 				if (output[i] > 9)
@@ -50,15 +50,15 @@ Dweller::Dweller(const string & name, const int & unique)
 				}
 			}
 		}
-		else 
+		else
 		{
 			throw exception("Out of range");
 		}
-
+	
 	}
 
 	SPECIAL_ = stoi(output);
-	
+
 }
 
 
@@ -92,14 +92,16 @@ void Dweller::receiveRadDamage(const int & radDamage)
 	{
 		health_ -= (100 - radiation_);
 	}
-	
+
 }
 
 void Dweller::receiveEquipmentDamage(const int & equipDamage)
 {
 
+	outfit_->receiveDamage(equipDamage);
+	weapon_->receiveDamage(equipDamage);
 
-
+	
 }
 
 int Dweller::getCurrentHealth() const
@@ -114,7 +116,10 @@ int Dweller::getCurrentRadDamage() const
 
 int Dweller::getAttackDmg() const
 {
-
+	if (weapon_ == NULL)
+		return 1;
+	else
+		return weapon_->getAttackDmg();
 }
 
 int Dweller::getSPECIAL() const
@@ -142,7 +147,7 @@ void Dweller::useStimpak()
 void Dweller::useRadAway()
 {
 	receiveRadDamage(-10);
-	
+
 }
 
 void Dweller::setPosition(const Vec2D & otherPosition)
@@ -165,18 +170,21 @@ bool Dweller::isDead()
 	{
 		return false;
 	}
-	
+
 }
 
 Outfit* Dweller::assignOutfit(Outfit * wearOutfit)
 {
 	outfit_ = wearOutfit;
 
+	return outfit_;
 }
 
 Weapon* Dweller::assignWeapon(Weapon * wearWeapon)
 {
 	weapon_ = wearWeapon;
+
+	return weapon_;
 
 }
 
