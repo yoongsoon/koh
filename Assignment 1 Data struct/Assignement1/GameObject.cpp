@@ -9,7 +9,7 @@ GameObject::GameObject(const string & nameOfGameObject)
 	++count;  // add count for each  GameObject created
 }
 
-GameObject ::~GameObject()
+GameObject::~GameObject()
 {
 
 }

@@ -30,7 +30,6 @@ public:
 
 protected:
 	Vec2D position_;
-	string name_;
 	int SPECIAL_;
 	int health_;
 	int radiation_;
