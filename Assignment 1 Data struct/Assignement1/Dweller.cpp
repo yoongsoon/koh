@@ -4,8 +4,9 @@ using namespace std;
 
 
 Dweller::Dweller(const string & name, const int & unique)
+	:GameObject(name)
 {
-	name_ = name;
+	
 	health_ = 100;
 	radiation_ = 0;
 	stimpak_ = 0;
@@ -14,7 +15,7 @@ Dweller::Dweller(const string & name, const int & unique)
 	weapon_ = NULL;
 
 	string dwellerSpecial = to_string(unique);
-	string output;
+	string output = "0000000";
 
 	if (assignOutfit(outfit_) == NULL)
 	{
@@ -22,7 +23,7 @@ Dweller::Dweller(const string & name, const int & unique)
 		{
 			for (unsigned int j = 0; j < dwellerSpecial.size(); j++)
 			{
-				output[j] = dwellerSpecial[j];
+				output[j] = dwellerSpecial[j] - '0' ;
 				if (output[j] >9)
 				{
 					output[j] = 9;
@@ -43,7 +44,7 @@ Dweller::Dweller(const string & name, const int & unique)
 		{
 			for (unsigned int i = 0; i < outfitSpecial.size(); i++)
 			{
-				output[i] = outfitSpecial[i] + dwellerSpecial[i];
+				output[i] = outfitSpecial[i]- '0' + dwellerSpecial[i] -'0';
 				if (output[i] > 9)
 				{
 					output[i] = 9;
@@ -56,6 +57,11 @@ Dweller::Dweller(const string & name, const int & unique)
 		}
 	
 	}
+	for (unsigned z = 0; z < output.size(); z++)
+	{
+		output[z] += '0';
+	}
+
 
 	SPECIAL_ = stoi(output);
 
@@ -97,11 +103,24 @@ void Dweller::receiveRadDamage(const int & radDamage)
 
 void Dweller::receiveEquipmentDamage(const int & equipDamage)
 {
+	if (outfit_ == NULL)
+	{
 
-	outfit_->receiveDamage(equipDamage);
-	weapon_->receiveDamage(equipDamage);
+	}
+	else
+	{
+		outfit_->receiveDamage(equipDamage);
+	}
+	if (weapon_ == NULL)
+	{
 
-	
+	}
+	else
+	{
+		weapon_->receiveDamage(equipDamage);
+
+	}
+
 }
 
 int Dweller::getCurrentHealth() const

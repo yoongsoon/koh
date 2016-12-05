@@ -6,15 +6,15 @@ using namespace std;
 class GameObject
 {
 public:
-  	GameObject();
- 	~GameObject();
-  virtual  string getName(void) = 0;
+	GameObject();
+	virtual ~GameObject();
+	string getName(void);
 	static int getCount();
 protected:
-	 GameObject(const string &);
-     const string kName;
+	GameObject(const string &);
+	const string kName;
 private:
-     static int count;
+	static int count;
 };
 
 #endif
